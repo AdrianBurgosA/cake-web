@@ -7,10 +7,14 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import api from '../api/Axios'
+import Modal from '../utils/ShopModal'
 
 const ProductsPage = () => {
 
     const [products, setProducts] = useState([])
+    const [open, setOpen] = useState(false)
+    const handleOpen = () => setOpen(true)
+    const handleClose = () => setOpen(false)
 
     document.title = "Products"
 
@@ -53,7 +57,8 @@ const ProductsPage = () => {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Button size="small" variant="contained">Shop Now</Button>
+                                    <Button size="small" variant="contained" onClick={handleOpen}>Shop Now</Button>
+                                    <Modal open={open} handleClose={handleClose} product={p}/>
                                 </CardActions>
                             </Card>
                         </Grid>

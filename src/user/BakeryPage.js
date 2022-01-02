@@ -7,10 +7,15 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import api from '../api/Axios'
+import Modal from '../utils/ShopModal'
 
 const BakeryPage = () => {
     const [products, setProducts] = useState([])
-    document.title = "Cakes"
+    const [open, setOpen] = useState(false)
+    const handleOpen = () => setOpen(true)
+    const handleClose = () => setOpen(false)
+
+    document.title = "Bakery"
     useEffect(() => {
         const fetchData = async () => {
             try{
@@ -50,7 +55,8 @@ const BakeryPage = () => {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Button size="small" variant="contained">Shop Now</Button>
+                                    <Button size="small" variant="contained" onClick={handleOpen}>Shop Now</Button>
+                                    <Modal open={open} handleClose={handleClose} product={p}/>
                                 </CardActions>
                             </Card>
                         </Grid>

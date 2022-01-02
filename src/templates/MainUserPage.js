@@ -13,14 +13,14 @@ import MenuItem from '@mui/material/MenuItem';
 import {Link, useNavigate} from 'react-router-dom'
 
 const pages = ['Bakery', 'Desserts', 'Cake Shop'];
-const urls = ['/products/bakery','/products','/products/cakes']
+const urls = ['/products/bakery','/products/desserts','/products/cakes']
+const urlSettings = ['/products','/']
 const settings = ['Account', 'Logout'];
-const urlsUsers = ['/products','/']
 
 const MainUserPage = (props) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  
+  const navigate = useNavigate()
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -113,7 +113,7 @@ const MainUserPage = (props) => {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar alt="U" src="/static/images/avatar/2.jpg" />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -134,7 +134,7 @@ const MainUserPage = (props) => {
               >
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                    <Button key={setting} onClick={() => navigate(urlSettings[settings.indexOf(setting)])}>{setting}</Button>
                   </MenuItem>
                 ))}
               </Menu>

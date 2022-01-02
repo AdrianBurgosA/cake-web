@@ -15,11 +15,11 @@ const CakesPage = () => {
     const handleOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
 
-    document.title = "Cakes"
+    document.title = "Desserts"
     useEffect(() => {
         const fetchData = async () => {
             try{
-                const response = await api.post('/products/cakes',{type: 'cake'})
+                const response = await api.post('/products/cakes',{type: 'dessert'})
                 setProducts(response.data)
             }catch(err){
                 if(err.response){
@@ -56,7 +56,7 @@ const CakesPage = () => {
                                 </CardContent>
                                 <CardActions>
                                     <Button size="small" variant="contained" onClick={handleOpen}>Shop Now</Button>
-                                    <Modal open={open} handleClose={handleClose} product={p} />
+                                    <Modal open={open} handleClose={handleClose} product={p} />    <Button size="small" variant="contained" onClick={handleOpen}>Shop Now</Button>
                                 </CardActions>
                             </Card>
                         </Grid>

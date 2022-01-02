@@ -5,7 +5,7 @@ import Register from './public/Register'
 import MainPage from './user/ProductsPage'
 import Cakes from './user/CakesPage'
 import Bakery from './user/BakeryPage'
-import axios from 'axios'
+import Desserts from './user/DessertsPage'
 
 const App = () => {
   return(
@@ -17,6 +17,7 @@ const App = () => {
         <Route path="/products" element={<MainPage/>}/>
         <Route path="/products/cakes" element={<Cakes/>}/>
         <Route path="/products/bakery" element={<Bakery/>}/>
+        <Route path="/products/desserts" element={<Desserts/>}/>
       </Routes>
     </BrowserRouter>
   )
