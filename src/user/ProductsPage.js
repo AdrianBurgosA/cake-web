@@ -11,8 +11,9 @@ import api from '../api/Axios'
 const ProductsPage = () => {
 
     const [products, setProducts] = useState([])
+
     document.title = "Products"
-    
+
     useEffect(() => {
         const fetchData = async () => {
             try{

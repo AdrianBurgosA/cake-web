@@ -2,6 +2,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
+import Alert from '@mui/material/Alert';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -12,6 +13,7 @@ import axios from 'axios'
 
 const Register = () => {
   const theme = createTheme();
+  const [showAlert, setShowAlert] = useState(null)
   const [user, setUser] = useState({
     name: '',
     email:'',
@@ -23,10 +25,10 @@ const Register = () => {
     e.preventDefault()
     axios.post('http://localhost:8081/api/endpoints/add',user)
       .then(res => {
-        console.log(res)
+        setShowAlert(true)
       })
       .catch(err => {
-        console.log(err)
+        setShowAlert(false)
       })
   }
 
@@ -118,6 +120,11 @@ const Register = () => {
               >
                 Register
               </Button>
+              {
+                showAlert
+                ? <Alert severity="success">New user saved!</Alert>
+                : <Alert severity="error">Something is wrong</Alert>
+              }
             </Box>
           </Box>
         </Grid>

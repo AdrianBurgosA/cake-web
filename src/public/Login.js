@@ -9,22 +9,26 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import React,{useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
+import Alert from '@mui/material/Alert';
 import axios from 'axios'
 
 const Login = () => {
   const theme = createTheme();
-
-  const [user, setUser] = useState({username: '', password:''})
+  const [userRequest, setUserRequest] = useState({username: '', password:''})
+  const [showAlert, setShowAlert] = useState(true)
+  const navigate = useNavigate();
   
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.post('http://localhost:8081/api/endpoints/login',user)
+    axios.post('http://localhost:8081/api/endpoints/login',userRequest)
       .then(res => {
+        setUserRequest({username: '', password:''})
         localStorage.setItem('token', res.token)
+        navigate('/products')
       })
       .catch(err => {
-        console.log(err)
+        setShowAlert(false)
       })
   }
 
@@ -68,8 +72,8 @@ const Login = () => {
                 label="Username"
                 name="username"
                 autoComplete="email"
-                value={user.username}
-                onChange = {(event) => setUser({...user,username: event.target.value})}
+                value={userRequest.username}
+                onChange = {(event) => setUserRequest({...userRequest,username: event.target.value})}
                 autoFocus
               />
               <TextField
@@ -80,8 +84,8 @@ const Login = () => {
                 label="Password"
                 type="password"
                 id="password"
-                value={user.password}
-                onChange={(event) => setUser({...user,password:event.target.value})}
+                value={userRequest.password}
+                onChange={(event) => setUserRequest({...userRequest,password:event.target.value})}
                 autoComplete="current-password"
               />
               <FormControlLabel
@@ -105,6 +109,11 @@ const Login = () => {
                   </Link>
                 </Grid>
               </Grid>
+              {
+                showAlert
+                ? <></>
+                : <Alert severity="error">Wrong Credentials!</Alert>
+              }
             </Box>
           </Box>
         </Grid>
